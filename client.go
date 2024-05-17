@@ -10,8 +10,6 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-
-	"github.com/northes/httpx/tools"
 )
 
 type Client struct {
@@ -144,7 +142,7 @@ func (c *Client) do(ctxs ...context.Context) (*Response, error) {
 				return nil, errors.New(fmt.Sprintf("body unmarshal(%v): %v", c.body, err))
 			}
 			body = bytes.NewReader(b)
-			c.contentType = tools.ApplicationJson.String()
+			c.contentType = ApplicationJson.String()
 		}
 	}
 
@@ -159,7 +157,7 @@ func (c *Client) do(ctxs ...context.Context) (*Response, error) {
 
 	req.Header = c.head
 	if c.contentType != "" {
-		req.Header.Set(tools.ContentTypeHeaderKey, c.contentType)
+		req.Header.Set(ContentTypeHeaderKey, c.contentType)
 	}
 
 	client := http.Client{
